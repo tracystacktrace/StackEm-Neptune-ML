@@ -14,7 +14,7 @@ public class GuiButtonHover extends GuiButton {
     }
 
     public void drawHoverString(FontRenderer fontRenderer, int mouseX, int mouseY) {
-        if (!this.canDisplayInfo) {
+        if (!this.canDisplayInfo || !this.enabled2) {
             return;
         }
 
