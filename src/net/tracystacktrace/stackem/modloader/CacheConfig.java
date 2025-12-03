@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public final class CacheConfig {
 
-    public static String [] getCacheData(File configFolder) {
+    public static String[] getCacheData(File configFolder) {
         final File stackemCache = new File(configFolder, "stackem.cache");
 
         if (!stackemCache.exists() || stackemCache.isDirectory()) {
@@ -25,7 +25,7 @@ public final class CacheConfig {
         }
     }
 
-    public static void writeCacheData(File configFolder, String [] cache) {
+    public static void writeCacheData(File configFolder, String[] cache) {
         final File stackemCache = new File(configFolder, "stackem.cache");
 
         if (!configFolder.exists()) {
@@ -41,7 +41,7 @@ public final class CacheConfig {
     }
 
     @SuppressWarnings("DataFlowIssue")
-    public static File [] getPossibleTexturePacks(File gameFolder) {
+    public static File[] getPossibleTexturePacks(File gameFolder) {
         final File texturepacksFolder = new File(gameFolder, "texturepacks");
         if (texturepacksFolder.exists() && texturepacksFolder.isDirectory()) {
             return texturepacksFolder.listFiles();

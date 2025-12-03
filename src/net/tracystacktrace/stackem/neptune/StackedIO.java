@@ -26,7 +26,7 @@ public class StackedIO {
         }
     }
 
-    public ZipDrivenTexturePack [] getArchives() {
+    public ZipDrivenTexturePack[] getArchives() {
         return this.archives;
     }
 

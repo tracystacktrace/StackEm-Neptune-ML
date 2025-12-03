@@ -1,7 +1,10 @@
 package net.tracystacktrace.stackem.modloader.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.*;
+import net.minecraft.src.GuiButton;
+import net.minecraft.src.GuiScreen;
+import net.minecraft.src.StringTranslate;
+import net.minecraft.src.TexturePackDefault;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
@@ -146,10 +149,10 @@ public class GuiTextureStack extends GuiScreen {
         super.drawScreen(mouseX, mouseY, deltaTicks);
 
         // draw hover strings
-        for(int i = 0; i < controlList.size(); i++) {
+        for (int i = 0; i < controlList.size(); i++) {
             final GuiButton button = (GuiButton) controlList.get(i);
-            if(button instanceof GuiButtonHover) {
-                ((GuiButtonHover)button).drawHoverString(fontRenderer, mouseX, mouseY);
+            if (button instanceof GuiButtonHover) {
+                ((GuiButtonHover) button).drawHoverString(fontRenderer, mouseX, mouseY);
             }
         }
     }

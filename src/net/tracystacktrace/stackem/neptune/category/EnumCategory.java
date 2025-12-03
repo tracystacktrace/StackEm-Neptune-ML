@@ -44,10 +44,10 @@ public enum EnumCategory {
     }
 
     @SuppressWarnings({"ForLoopReplaceableByForEach", "ManualArrayToCollectionCopy", "UseBulkOperation"})
-    public static String [] collect(
+    public static String[] collect(
             Function<String, String> translator,
-            EnumCategory [] categories,
-            String [] custom
+            EnumCategory[] categories,
+            String[] custom
     ) {
         final List<String> names = new ArrayList<>();
 

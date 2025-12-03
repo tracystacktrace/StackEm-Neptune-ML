@@ -27,14 +27,6 @@ public class mod_StackEmNeptune extends BaseMod {
     public boolean OnTickInGUI(Minecraft game, GuiScreen current) {
         if (game.currentScreen != null && game.currentScreen.getClass().isAssignableFrom(GuiTexturePacks.class)) {
             game.displayGuiScreen(new GuiTextureStack(((GuiTexturePacks) game.currentScreen).guiScreen));
-
-//            game.currentScreen = new GuiTextureStack(((GuiTexturePacks)game.currentScreen).guiScreen);
-//            game.setIngameNotInFocus();
-//            ScaledResolution var2 = new ScaledResolution(game.gameSettings, game.displayWidth, game.displayHeight);
-//            int var3 = var2.getScaledWidth();
-//            int var4 = var2.getScaledHeight();
-//            game.currentScreen.setWorldAndResolution(game, var3, var4);
-//            game.skipRenderWorld = false;
         }
         return true;
     }

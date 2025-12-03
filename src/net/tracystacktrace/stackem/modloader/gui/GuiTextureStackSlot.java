@@ -55,7 +55,7 @@ public class GuiTextureStackSlot extends GuiSlot {
     }
 
     private void bindTexturePackIcon(RenderEngine renderEngine, PreviewTexturePack pack) {
-        if(!pack.hasTextureIndex()) {
+        if (!pack.hasTextureIndex()) {
             pack.setTextureIndex(renderEngine.allocateAndSetupTexture(pack.getIcon()));
         }
         renderEngine.bindTexture(pack.getTextureIndex());

@@ -43,7 +43,7 @@ public class NeptuneProperties {
         return candidate;
     }
 
-    public void setStringArray(String key, String [] value) {
+    public void setStringArray(String key, String[] value) {
         if (value == null) {
             this.properties.setProperty(key, null);
             return;
@@ -67,7 +67,7 @@ public class NeptuneProperties {
         this.properties.setProperty(key, builder.toString());
     }
 
-    public String [] getStringArray(String key) {
+    public String[] getStringArray(String key) {
         final String parseString = this.properties.getProperty(key);
         if (parseString == null || "null".equals(parseString)) {
             return null;

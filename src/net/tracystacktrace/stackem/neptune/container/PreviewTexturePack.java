@@ -81,11 +81,11 @@ public class PreviewTexturePack extends ContainerTexturePack {
         return this.website;
     }
 
-    public String [] getAuthors() {
+    public String[] getAuthors() {
         return this.authors;
     }
 
-    public String [] getBakedCategories() {
+    public String[] getBakedCategories() {
         return this.bakedCategoriesList;
     }
 
