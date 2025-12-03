@@ -18,6 +18,18 @@ public class mod_StackEmNeptune extends BaseMod {
         return "1.0";
     }
 
+    public String Name() {
+        return "StackEm Neptune";
+    }
+
+    public String Description() {
+        return "Support for stacked texturepacks with runtime texture gluing!";
+    }
+
+    public String Icon() {
+        return "/net/tracystacktrace/stackem/icon.png";
+    }
+
     public mod_StackEmNeptune() {
         System.out.println("Loading Stack' Em, Part 2");
         ModLoader.SetInGUIHook(this, true, true);

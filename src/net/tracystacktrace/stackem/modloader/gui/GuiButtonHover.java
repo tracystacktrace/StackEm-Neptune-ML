@@ -23,8 +23,8 @@ public class GuiButtonHover extends GuiButton {
         }
 
         final int string_width = fontRenderer.getStringWidth(this.hoverString);
-        this.drawRect(mouseX + 3, mouseY + 3, mouseX + 6 + string_width + 4, mouseY + 6 + 4 + 11, -1073741824);
-        fontRenderer.drawString(this.hoverString, mouseX + 6, mouseY + 6, 16777120);
+        this.drawRect(mouseX + 5, mouseY + 5, mouseX + 10 + string_width + 2, mouseY + 10 + 4 + 6, -1073741824);
+        fontRenderer.drawString(this.hoverString, mouseX + 8, mouseY + 8, 16777120);
     }
 
     protected boolean mouseHovered(int mouseX, int mouseY) {
