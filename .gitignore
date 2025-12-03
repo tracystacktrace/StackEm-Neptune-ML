@@ -1,0 +1,15 @@
+
+Minecraft Client.iml
+md5/
+jars/
+game/
+bin/
+reobf/
+source/
+classes/
+.idea/
+src/
+
+
+!src/net/tracystacktrace/stackem/
+!src/net/minecraft/src/mod_StackEmNeptune.java
