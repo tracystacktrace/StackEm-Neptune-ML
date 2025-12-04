@@ -3,11 +3,12 @@ package net.minecraft.src;
 import net.minecraft.client.Minecraft;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
-import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.gui.GuiTextureStack;
 import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentsProvider;
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.patch.QuickEntityRenderer;
+import org.lwjgl.opengl.Display;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class mod_StackEmNeptune extends BaseMod {
 
     @Override
     public void ModsLoaded() {
-        if(!(ModLoader.getMinecraftInstance().entityRenderer instanceof QuickEntityRenderer)) {
+        if (!(ModLoader.getMinecraftInstance().entityRenderer instanceof QuickEntityRenderer)) {
             CompatibilityTools.log("Warning! Something cancelled custom EntityRenderer code; are you using OverrideAPI?");
             ModLoader.SetInGameHook(this, true, true);
             ModLoader.SetInGUIHook(this, true, true);
@@ -77,7 +78,7 @@ public class mod_StackEmNeptune extends BaseMod {
         CompatibilityTools.loadingPresentLang();
         SegmentsProvider.loadSegmentsData();
 
-        if(CompatibilityTools.OBFUSCATED_ENV) {
+        if (CompatibilityTools.OBFUSCATED_ENV) {
             CompatibilityTools.log("Running in DEV environment, no obfuscation present!");
         }
 
@@ -93,7 +94,12 @@ public class mod_StackEmNeptune extends BaseMod {
             configFolder.mkdirs();
         }
 
+        mod_StackEmNeptune.applyCachedTexturepackStack(client, true, configFolder);
+    }
+
+    public static void applyCachedTexturepackStack(Minecraft client, boolean init, File configFolder) {
         // Fallback to default texturepack
+        client.texturePackList.selectedTexturePack.closeTexturePackFile();
         client.texturePackList.selectedTexturePack = new TexturePackDefault();
 
         final List<File> collector = new ArrayList<>();
@@ -110,12 +116,16 @@ public class mod_StackEmNeptune extends BaseMod {
                 .filter(Objects::nonNull)
                 .forEach(collector::add);
 
-        CompatibilityTools.log("How many texturepacks were pre-fetched? " + collector.size());
+        if (init) {
+            CompatibilityTools.log("How many texturepacks were pre-fetched? " + collector.size());
+        }
 
         // Force set current texturepack as StackEm internal implementation
         client.texturePackList.setTexturePack(new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector));
         client.renderEngine.refreshTextures();
-        
+
         ImageGlueBridge.processTexturesSegments(client.renderEngine);
+        //client.renderGlobal.loadRenderers();
+        Display.update();
     }
 }

@@ -4,10 +4,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiScreen;
 import net.minecraft.src.TexturePackDefault;
+import net.minecraft.src.mod_StackEmNeptune;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
-import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
 import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
 import net.tracystacktrace.stackem.neptune.fetch.FetchMaster;
 import org.lwjgl.opengl.Display;
@@ -36,6 +37,7 @@ public class GuiTextureStack extends GuiScreen {
     private GuiButtonHover buttonWebsite;
 
     private boolean clickedAtLeastOnce;
+    private boolean anyChangesMade = false;
 
     public GuiTextureStack(GuiScreen parentScreen) {
         this.parentScreen = parentScreen;
@@ -98,6 +100,7 @@ public class GuiTextureStack extends GuiScreen {
             }
 
             if (button.id == -2) {
+                this.anyChangesMade = true;
                 this.pushChangesGlobally();
                 this.mc.displayGuiScreen(this.parentScreen);
                 return;
@@ -133,6 +136,7 @@ public class GuiTextureStack extends GuiScreen {
         }
     }
 
+    @SuppressWarnings("ForLoopReplaceableByForEach")
     @Override
     public void drawScreen(int mouseX, int mouseY, float deltaTicks) {
         this.drawDefaultBackground();
@@ -160,6 +164,12 @@ public class GuiTextureStack extends GuiScreen {
     public void onGuiClosed() {
         super.onGuiClosed();
         this.sequoiaCache.forEach(pack -> mc.renderEngine.deleteTexture(pack.popTextureIndex()));
+        if (!this.anyChangesMade) {
+            //This is initially caused by the way how initGui of original GuiTexturePacks works
+            //it calls the updateAvailableTextures() that resets the current internal stacked instance, borking everything
+            //we need to force push to fix it
+            mod_StackEmNeptune.applyCachedTexturepackStack(mc, false, new File(Minecraft.getMinecraftDir(), "config"));
+        }
     }
 
     public void updateMoveButtonsState(int index) {
@@ -169,11 +179,6 @@ public class GuiTextureStack extends GuiScreen {
             this.buttonToggle.enabled2 = true;
             this.buttonToggle.displayString = CompatibilityTools.translateKey("stackem.icon.cross");
             this.buttonToggle.hoverString = CompatibilityTools.translateKey("stackem.button.remove");
-
-            //todo fix buttons location
-            //final int slotOffsetY = this.height / 2 - (this.sequoiaCache.size() * 18) - 9;
-            //this.buttonMoveUp.yPosition = slotOffsetY + (36 * index);
-            //this.buttonMoveDown.yPosition = slotOffsetY + 18 + (36 * index);
 
             this.buttonMoveUp.enabled2 = true;
             this.buttonMoveDown.enabled2 = true;
@@ -306,8 +311,9 @@ public class GuiTextureStack extends GuiScreen {
         this.mc.renderEngine.refreshTextures();
         ImageGlueBridge.processTexturesSegments(this.mc.renderEngine);
         this.mc.renderGlobal.loadRenderers();
-        //this.mc.fontRenderer = new FontRenderer(StackEm.getContainerInstance(), this.mc.renderEngine);
 
+        //leftovers from StackEm ReIndev
+        //this.mc.fontRenderer = new FontRenderer(StackEm.getContainerInstance(), this.mc.renderEngine);
         //SoundCleanupHelper.cleanupSoundSources(this.mc.sndManager);
         //this.mc.sndManager.refreshSounds(stacked);
         //this.mc.sndManager.onSoundOptionsChanged();
