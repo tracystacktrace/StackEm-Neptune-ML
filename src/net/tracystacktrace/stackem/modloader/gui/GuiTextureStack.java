@@ -335,26 +335,26 @@ public class GuiTextureStack extends GuiScreen {
         slotManager.elementClicked(index + 1, false);
     }
 
-    protected void renderCategoriesTooltip(int x, int y, PreviewTexturePack tag) {
-        GL11.glPushMatrix();
-        GL11.glTranslated(0.0, 0.0, 90.0);
-
-        final String[] data = tag.getBakedCategories();
-        final int sizeY = 12 * data.length;
-        int sizeX = 0;
-
-        for (int i = 0; i < data.length; i++) {
-            sizeX = Math.max(sizeX, fontRenderer.getStringWidth(data[i]));
-        }
-
-        this.drawGradientRect(x + 5, y + 5, x + 8 + sizeX + 3, y + 8 + sizeY, -1073741824, -1073741824);
-
-        for (int i = 0; i < data.length; i++) {
-            fontRenderer.drawString(data[i], x + 8, y + 8 + (i * 12), 16777120);
-        }
-
-        GL11.glPopMatrix();
-    }
+//    protected void renderCategoriesTooltip(int x, int y, PreviewTexturePack tag) {
+//        GL11.glPushMatrix();
+//        GL11.glTranslated(0.0, 0.0, 90.0);
+//
+//        final String[] data = tag.getBakedCategories();
+//        final int sizeY = 12 * data.length;
+//        int sizeX = 0;
+//
+//        for (int i = 0; i < data.length; i++) {
+//            sizeX = Math.max(sizeX, fontRenderer.getStringWidth(data[i]));
+//        }
+//
+//        this.drawGradientRect(x + 5, y + 5, x + 8 + sizeX + 3, y + 8 + sizeY, -1073741824, -1073741824);
+//
+//        for (int i = 0; i < data.length; i++) {
+//            fontRenderer.drawString(data[i], x + 8, y + 8 + (i * 12), 16777120);
+//        }
+//
+//        GL11.glPopMatrix();
+//    }
 
     public void drawGradientRectPublic(int var1, int var2, int var3, int var4, int var5, int var6) {
         this.drawGradientRect(var1, var2, var3, var4, var5, var6);

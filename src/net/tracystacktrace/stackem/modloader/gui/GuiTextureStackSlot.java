@@ -119,14 +119,14 @@ public class GuiTextureStackSlot extends GuiSlot {
         minecraft.fontRenderer.drawString(tag.secondLine, newX + iconHeight + 2, y + 12 + 11, 0x00D0D0D0);
     }
 
-    private boolean isSlotHovered(
-            final float mouseX,
-            final float mouseY,
-            final int x,
-            final float y
-    ) {
-        return mouseX > x && mouseX < (x + 320) && mouseY > y && mouseY < (y + 36);
-    }
+//    private boolean isSlotHovered(
+//            final float mouseX,
+//            final float mouseY,
+//            final int x,
+//            final float y
+//    ) {
+//        return mouseX > x && mouseX < (x + 320) && mouseY > y && mouseY < (y + 36);
+//    }
 
     public String limitString(String line, final int length, final boolean endDots) {
         if (line == null || line.length() < length) {
