@@ -3,7 +3,7 @@ package net.minecraft.src;
 import net.minecraft.client.Minecraft;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
-import net.tracystacktrace.stackem.modloader.gui.CompatibilityTools;
+import net.tracystacktrace.stackem.modloader.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.gui.GuiTextureStack;
 
 import java.io.File;

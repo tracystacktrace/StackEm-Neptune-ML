@@ -1,11 +1,13 @@
-package net.tracystacktrace.stackem.modloader.gui;
+package net.tracystacktrace.stackem.modloader;
 
+import net.minecraft.src.GuiSlot;
 import net.minecraft.src.StringTranslate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,8 +15,7 @@ import java.util.Map;
 @SuppressWarnings("UnnecessaryUnicodeEscape")
 public final class CompatibilityTools {
     private static final Map<String, String> ownTranslateKey = new HashMap<>();
-    public static boolean EXTENDED_CHARSET = false;
-    public static boolean EXTENDED_PREFIX_VALUES = false;
+    public static boolean RESIZABLE_WIDTH = false;
 
     private static boolean classExists(String s) {
         try {
@@ -27,9 +28,9 @@ public final class CompatibilityTools {
 
     public static void getKnownWithEnvironment() {
         if (classExists("net.minecraft.src.mod_NFC") || classExists("mod_NFC")) {
-            EXTENDED_CHARSET = true;
-            EXTENDED_PREFIX_VALUES = true;
+            RESIZABLE_WIDTH = true;
         }
+        //TODO: Add compatibility for other mods
     }
 
     public static void loadingPresentLang() {
@@ -56,6 +57,22 @@ public final class CompatibilityTools {
 
     public static boolean isValidWebsite(String website) {
         return website != null && (website.startsWith("https://") || website.startsWith("http://"));
+    }
+
+    public static void resizeWidth(GuiSlot slot, int w) {
+        if (RESIZABLE_WIDTH) {
+            try {
+                final Field field = slot.getClass().getDeclaredField("boxWidthLeft");
+                field.setAccessible(true);
+                field.set(slot, w);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+                System.out.println("Failed to resize the width");
+            } catch (IllegalAccessException e) {
+                System.out.println("LOL");
+                e.printStackTrace();
+            }
+        }
     }
 
     public static String translateKey(String key) {

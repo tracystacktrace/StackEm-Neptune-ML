@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiSlot;
 import net.minecraft.src.RenderEngine;
 import net.minecraft.src.Tessellator;
+import net.tracystacktrace.stackem.modloader.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
 import org.lwjgl.opengl.GL11;
 
@@ -19,6 +20,10 @@ public class GuiTextureStackSlot extends GuiSlot {
         this.parentScreen = parentScreen;
         this.minecraft = minecraft;
         this.right = width;
+
+        if (CompatibilityTools.RESIZABLE_WIDTH) {
+            CompatibilityTools.resizeWidth(this, 320);
+        }
     }
 
     @Override
@@ -88,7 +93,7 @@ public class GuiTextureStackSlot extends GuiSlot {
         }
 
         if (tag.isInStack()) {
-            parentScreen.drawGradientRectPublic(x, y, x + 216, y + 32, 0xC0903AA2, 0xC0903AA2);
+            parentScreen.drawGradientRectPublic(x, y, x + (CompatibilityTools.RESIZABLE_WIDTH ? 316 : 216), y + 32, 0xC0903AA2, 0xC0903AA2);
         }
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
