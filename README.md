@@ -1,8 +1,10 @@
 
 <div style="text-align: center;">
+
 ![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/master/docs/mod_logo.png)
 
-Test 1
+![GitHub License](https://img.shields.io/github/license/tracystacktrace/StackEm-Neptune-ML?label=License&color=blue) ![GitHub Tag](https://img.shields.io/github/v/tag/tracystacktrace/StackEm-Neptune-ML?label=Version)
+
 </div>
 
 ![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/master/docs/screenshot_b173_0.png)
