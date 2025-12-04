@@ -62,12 +62,17 @@ public final class CompatibilityTools {
     public static void resizeWidth(GuiSlot slot, int w) {
         if (RESIZABLE_WIDTH) {
             try {
-                final Field field = slot.getClass().getDeclaredField("boxWidthLeft");
-                field.setAccessible(true);
-                field.set(slot, w);
+                final Field fieldL = GuiSlot.class.getDeclaredField("boxWidthLeft");
+                final Field fieldR = GuiSlot.class.getDeclaredField("boxWidthRight");
+                fieldL.setAccessible(true);
+                fieldR.setAccessible(true);
+
+                final int splitW = w / 2;
+                fieldL.set(slot, splitW);
+                fieldR.set(slot, splitW);
             } catch (NoSuchFieldException e) {
-                e.printStackTrace();
                 System.out.println("Failed to resize the width");
+                e.printStackTrace();
             } catch (IllegalAccessException e) {
                 System.out.println("LOL");
                 e.printStackTrace();

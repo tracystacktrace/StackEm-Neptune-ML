@@ -22,7 +22,7 @@ public class GuiTextureStackSlot extends GuiSlot {
         this.right = width;
 
         if (CompatibilityTools.RESIZABLE_WIDTH) {
-            CompatibilityTools.resizeWidth(this, 320);
+            CompatibilityTools.resizeWidth(this, 360);
         }
     }
 
@@ -83,6 +83,7 @@ public class GuiTextureStackSlot extends GuiSlot {
 
     @Override
     protected void drawSlot(int index, int x, int y, int iconHeight, Tessellator tessellator) {
+        final int newX = CompatibilityTools.RESIZABLE_WIDTH ? x - 70 : x;
         final PreviewTexturePack tag = parentScreen.getSequoiaCacheElement(index);
         final boolean isSelectedOne = this.selectedIndex == index;
 
@@ -93,16 +94,16 @@ public class GuiTextureStackSlot extends GuiSlot {
         }
 
         if (tag.isInStack()) {
-            parentScreen.drawGradientRectPublic(x, y, x + (CompatibilityTools.RESIZABLE_WIDTH ? 316 : 216), y + 32, 0xC0903AA2, 0xC0903AA2);
+            parentScreen.drawGradientRectPublic(newX, y, newX + (CompatibilityTools.RESIZABLE_WIDTH ? 356 : 216), y + 32, 0xC0903AA2, 0xC0903AA2);
         }
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         tessellator.startDrawingQuads();
         tessellator.setColorOpaque_I(16777215);
-        tessellator.addVertexWithUV(x, (y + iconHeight), 0.0D, 0.0D, 1.0D);
-        tessellator.addVertexWithUV((x + iconHeight), (y + iconHeight), 0.0D, 1.0D, 1.0D);
-        tessellator.addVertexWithUV((x + iconHeight), y, 0.0D, 1.0D, 0.0D);
-        tessellator.addVertexWithUV(x, y, 0.0D, 0.0D, 0.0D);
+        tessellator.addVertexWithUV(newX, (y + iconHeight), 0.0D, 0.0D, 1.0D);
+        tessellator.addVertexWithUV((newX + iconHeight), (y + iconHeight), 0.0D, 1.0D, 1.0D);
+        tessellator.addVertexWithUV((newX + iconHeight), y, 0.0D, 1.0D, 0.0D);
+        tessellator.addVertexWithUV(newX, y, 0.0D, 0.0D, 0.0D);
         tessellator.draw();
         String showName = tag.getName();
         if (tag.isInStack()) {
@@ -113,9 +114,9 @@ public class GuiTextureStackSlot extends GuiSlot {
             showName = limitString(showName, 44, true);
         }
 
-        minecraft.fontRenderer.drawString(showName, x + iconHeight + 2, y + 1, 16777215);
-        minecraft.fontRenderer.drawString(tag.firstLine, x + iconHeight + 2, y + 12, 8421504);
-        minecraft.fontRenderer.drawString(tag.secondLine, x + iconHeight + 2, y + 12 + 11, 8421504);
+        minecraft.fontRenderer.drawString(showName, newX + iconHeight + 2, y + 1, 16777215);
+        minecraft.fontRenderer.drawString(tag.firstLine, newX + iconHeight + 2, y + 12, 8421504);
+        minecraft.fontRenderer.drawString(tag.secondLine, newX + iconHeight + 2, y + 12 + 11, 8421504);
     }
 
     private boolean isSlotHovered(

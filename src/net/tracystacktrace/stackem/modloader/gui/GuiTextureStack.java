@@ -64,10 +64,10 @@ public class GuiTextureStack extends GuiScreen {
         this.slotManager.registerScrollButtons(null, 7, 8);
 
         // action buttons
-        this.controlList.add(this.buttonToggle = new GuiButtonHover(-105, 5, 20, 16, 16, CompatibilityTools.translateKey("stackem.icon.cross"), CompatibilityTools.translateKey("stackem.button.remove")));
-        this.controlList.add(this.buttonWebsite = new GuiButtonHover(-106, 5, 20 + 18, 16, 16, CompatibilityTools.translateKey("stackem.icon.info"), CompatibilityTools.translateKey("stackem.button.website")));
-        this.controlList.add(this.buttonMoveDown = new GuiButtonHover(-104, 5 + 18, 20 + 18, 16, 16, CompatibilityTools.translateKey("stackem.icon.moveDown"), CompatibilityTools.translateKey("stackem.button.movedown")));
-        this.controlList.add(this.buttonMoveUp = new GuiButtonHover(-103, 5 + 18, 20, 16, 16, CompatibilityTools.translateKey("stackem.icon.moveUp"), CompatibilityTools.translateKey("stackem.button.moveup")));
+        this.controlList.add(this.buttonToggle = new GuiButtonHover(-105, 5, 20 + 46, 16, 16, CompatibilityTools.translateKey("stackem.icon.cross"), CompatibilityTools.translateKey("stackem.button.remove")));
+        this.controlList.add(this.buttonWebsite = new GuiButtonHover(-106, 5, 20 + 64, 16, 16, CompatibilityTools.translateKey("stackem.icon.info"), CompatibilityTools.translateKey("stackem.button.website")));
+        this.controlList.add(this.buttonMoveDown = new GuiButtonHover(-104, 5, 20 + 18, 16, 16, CompatibilityTools.translateKey("stackem.icon.moveDown"), CompatibilityTools.translateKey("stackem.button.movedown")));
+        this.controlList.add(this.buttonMoveUp = new GuiButtonHover(-103, 5, 20 , 16, 16, CompatibilityTools.translateKey("stackem.icon.moveUp"), CompatibilityTools.translateKey("stackem.button.moveup")));
 
 
         this.buttonToggle.enabled = false;
