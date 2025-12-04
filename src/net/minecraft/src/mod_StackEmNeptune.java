@@ -113,8 +113,9 @@ public class mod_StackEmNeptune extends BaseMod {
         CompatibilityTools.log("How many texturepacks were pre-fetched? " + collector.size());
 
         // Force set current texturepack as StackEm internal implementation
-        client.texturePackList.selectedTexturePack = new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector);
-
+        client.texturePackList.setTexturePack(new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector));
+        client.renderEngine.refreshTextures();
+        
         ImageGlueBridge.processTexturesSegments(client.renderEngine);
     }
 }
