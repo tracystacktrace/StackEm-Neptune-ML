@@ -20,7 +20,7 @@ public class mod_StackEmNeptune extends BaseMod {
     }
 
     public String Name() {
-        return "StackEm Neptune";
+        return "Stack 'Em Neptune";
     }
 
     public String Description() {
