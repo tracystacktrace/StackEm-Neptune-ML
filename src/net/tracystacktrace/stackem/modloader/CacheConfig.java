@@ -19,7 +19,7 @@ public final class CacheConfig {
         try {
             return Files.readAllLines(stackemCache.toPath()).toArray(new String[0]);
         } catch (IOException e) {
-            System.out.println("[Stack 'Em] Failed to read cache file properly! Fallback to default initiated.");
+            CompatibilityTools.log("Failed to read cache file properly, expect problems!");
             e.printStackTrace();
             return new String[0];
         }
@@ -35,7 +35,7 @@ public final class CacheConfig {
         try {
             Files.write(stackemCache.toPath(), Arrays.asList(cache), StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
-            System.out.println("[Stack 'Em] Failed to write the cache file properly! Expect a reset next session!");
+            CompatibilityTools.log("Failed to write cache properly, expect reset next session!");
             e.printStackTrace();
         }
     }

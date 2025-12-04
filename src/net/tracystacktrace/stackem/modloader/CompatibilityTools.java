@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +18,11 @@ import java.util.Map;
 public final class CompatibilityTools {
     private static final Map<String, String> ownTranslateKey = new HashMap<>();
     public static boolean RESIZABLE_WIDTH = false;
+    private static final DateTimeFormatter HHMMSS_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    public static void log(String message) {
+        System.out.printf("[%s] [Stack 'Em] %s\n", LocalTime.now().format(HHMMSS_FORMAT), message);
+    }
 
     private static boolean classExists(String s) {
         try {
@@ -28,6 +35,7 @@ public final class CompatibilityTools {
 
     public static void getKnownWithEnvironment() {
         if (classExists("net.minecraft.src.mod_NFC") || classExists("mod_NFC")) {
+            CompatibilityTools.log("Detected NFC! GuiSlot width extension allowed");
             RESIZABLE_WIDTH = true;
         }
         //TODO: Add compatibility for other mods
@@ -36,7 +44,7 @@ public final class CompatibilityTools {
     public static void loadingPresentLang() {
         final InputStream inputStream = CompatibilityTools.class.getResourceAsStream("/stackem.default.lang");
         if (inputStream == null) {
-            System.out.println("ACHTUNG ass me");
+            CompatibilityTools.log("Couldn't find stackem.default.lang! Corrupted mod zip?");
             return;
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
@@ -50,7 +58,7 @@ public final class CompatibilityTools {
                 ownTranslateKey.put(rawSplit[0], rawSplit[1]);
             }
         } catch (IOException e) {
-            System.out.println("ACHTUNG ass");
+            CompatibilityTools.log("Failed to load stackem.default.lang, expect problems: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -70,11 +78,8 @@ public final class CompatibilityTools {
                 final int splitW = w / 2;
                 fieldL.set(slot, splitW);
                 fieldR.set(slot, splitW);
-            } catch (NoSuchFieldException e) {
-                System.out.println("Failed to resize the width");
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                System.out.println("LOL");
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                CompatibilityTools.log("Failed to set custom width, am I outdated?");
                 e.printStackTrace();
             }
         }

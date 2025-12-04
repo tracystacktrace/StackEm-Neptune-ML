@@ -32,7 +32,7 @@ public class mod_StackEmNeptune extends BaseMod {
     }
 
     public mod_StackEmNeptune() {
-        System.out.println("Loading Stack' Em, Part 2");
+        CompatibilityTools.log("Initializing mod, progress 2/2");
         ModLoader.SetInGUIHook(this, true, true);
     }
 
@@ -45,10 +45,11 @@ public class mod_StackEmNeptune extends BaseMod {
     }
 
     static {
+        CompatibilityTools.log("Preparing the environment, thinking very hard!");
         CompatibilityTools.getKnownWithEnvironment();
         CompatibilityTools.loadingPresentLang();
 
-        System.out.println("Initializing Stack 'Em, Part 1");
+        CompatibilityTools.log("Initializing mod, progress 1/2");
         final Minecraft client = ModLoader.getMinecraftInstance();
 
         // Quickly form config folder
@@ -73,6 +74,8 @@ public class mod_StackEmNeptune extends BaseMod {
                         .orElse(null))
                 .filter(Objects::nonNull)
                 .forEach(collector::add);
+
+        CompatibilityTools.log("How many texturepacks were pre-fetched? " + collector.size());
 
         // Force set current texturepack as StackEm internal implementation
         client.texturePackList.selectedTexturePack = new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector);
