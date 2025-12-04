@@ -115,8 +115,8 @@ public class GuiTextureStackSlot extends GuiSlot {
         }
 
         minecraft.fontRenderer.drawString(showName, newX + iconHeight + 2, y + 1, 16777215);
-        minecraft.fontRenderer.drawString(tag.firstLine, newX + iconHeight + 2, y + 12, 8421504);
-        minecraft.fontRenderer.drawString(tag.secondLine, newX + iconHeight + 2, y + 12 + 11, 8421504);
+        minecraft.fontRenderer.drawString(tag.firstLine, newX + iconHeight + 2, y + 12, 0x00D0D0D0);
+        minecraft.fontRenderer.drawString(tag.secondLine, newX + iconHeight + 2, y + 12 + 11, 0x00D0D0D0);
     }
 
     private boolean isSlotHovered(
