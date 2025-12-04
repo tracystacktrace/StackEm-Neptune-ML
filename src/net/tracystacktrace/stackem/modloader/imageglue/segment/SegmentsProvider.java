@@ -44,6 +44,30 @@ public final class SegmentsProvider {
     private static SegmentedTexture tryToUnpack(String line) {
         final String[] rawStrip = line.split(":");
 
+        final String dataLine = rawStrip[1].trim();
+
+        // Square automated data generation - no need to manually type of similar pattern textures
+        if(dataLine.startsWith("square_gen")) {
+            final String[] properties = dataLine.split(" ");
+
+            final int width = Integer.parseInt(properties[1]);
+            final int height = Integer.parseInt(properties[2]);
+            final int canvasWidth = Integer.parseInt(properties[3]);
+            final int canvasHeight = Integer.parseInt(properties[4]);
+
+            final int stepsX = canvasWidth / width;
+            final int stepsY = canvasHeight / height;
+
+            final int[][] genArray = new int[stepsX * stepsY][];
+            for(int i = 0; i < stepsX; i++) {
+                for(int j = 0; j < stepsY; j++) {
+                    genArray[i * stepsX  + j] = new int[] {i * width, j * height, width, height};
+                }
+            }
+
+            return new SegmentedTexture(rawStrip[0].trim(), genArray);
+        }
+
         final int[][] data = Arrays.stream(rawStrip[1].trim().split(";"))
                 .map(String::trim)
                 .filter(s -> s.startsWith("[") && s.endsWith("]"))
