@@ -1,5 +1,5 @@
 
-<div style="text-align: center;">
+<div align="center" style="text-align: center;">
 
 ![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/master/docs/mod_logo.png)
 
