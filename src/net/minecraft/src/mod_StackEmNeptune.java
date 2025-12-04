@@ -3,6 +3,7 @@ package net.minecraft.src;
 import net.minecraft.client.Minecraft;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
+import net.tracystacktrace.stackem.modloader.gui.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.gui.GuiTextureStack;
 
 import java.io.File;
@@ -44,6 +45,9 @@ public class mod_StackEmNeptune extends BaseMod {
     }
 
     static {
+        CompatibilityTools.getKnownWithEnvironment();
+        CompatibilityTools.loadingPresentLang();
+
         System.out.println("Initializing Stack 'Em, Part 1");
         final Minecraft client = ModLoader.getMinecraftInstance();
 

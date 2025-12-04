@@ -3,7 +3,6 @@ package net.tracystacktrace.stackem.modloader.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiScreen;
-import net.minecraft.src.StringTranslate;
 import net.minecraft.src.TexturePackDefault;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
@@ -39,37 +38,35 @@ public class GuiTextureStack extends GuiScreen {
     public GuiTextureStack(GuiScreen parentScreen) {
         this.parentScreen = parentScreen;
 
-        final StringTranslate translate = StringTranslate.getInstance();
-        this.hint1 = translate.translateKey("stackem.gui.hint1");
-        this.hint2 = translate.translateKey("stackem.gui.hint2");
-        this.actions = translate.translateKey("stackem.gui.actions");
+        this.hint1 = CompatibilityTools.translateKey("stackem.gui.hint1");
+        this.hint2 = CompatibilityTools.translateKey("stackem.gui.hint2");
+        this.actions = CompatibilityTools.translateKey("stackem.gui.actions");
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         this.clickedAtLeastOnce = false;
         this.controlList.clear();
         this.fetchCacheFromOuterworld();
 
-        final StringTranslate translate = StringTranslate.getInstance();
-
         // texture pack folder
-        final GuiButtonHover openFolder = new GuiButtonHover(-1, this.width - 120, this.height - 25, 20, 20, "\u00A79\u2604", translate.translateKey("stackem.gui.folder"));
+        final GuiButtonHover openFolder = new GuiButtonHover(-1, this.width - 150, this.height - 25, 20, 20, CompatibilityTools.translateKey("stackem.icon.folder"), CompatibilityTools.translateKey("stackem.gui.folder"));
         openFolder.canDisplayInfo = true;
         this.controlList.add(openFolder);
 
         // save & close
-        this.controlList.add(new GuiButton(-2, this.width - 95, this.height - 25, 90, 20, translate.translateKey("stackem.gui.done")));
+        this.controlList.add(new GuiButton(-2, this.width - 125, this.height - 25, 120, 20, CompatibilityTools.translateKey("stackem.gui.done")));
 
         // slot manager
         this.slotManager = new GuiTextureStackSlot(this.mc, this, this.width, this.height);
         this.slotManager.registerScrollButtons(null, 7, 8);
 
         // action buttons
-        this.controlList.add(this.buttonToggle = new GuiButtonHover(-105, 5, 20, 16, 16, "\u00A74\u274C", translate.translateKey("stackem.button.remove")));
-        this.controlList.add(this.buttonWebsite = new GuiButtonHover(-106, 5, 20 + 18, 16, 16, "\u00A7b\u2139", translate.translateKey("stackem.button.website")));
-        this.controlList.add(this.buttonMoveDown = new GuiButtonHover(-104, 5 + 18, 20 + 18, 16, 16, "\u00A79\u2193", translate.translateKey("stackem.button.movedown")));
-        this.controlList.add(this.buttonMoveUp = new GuiButtonHover(-103, 5 + 18, 20, 16, 16, "\u00A79\u2191", translate.translateKey("stackem.button.moveup")));
+        this.controlList.add(this.buttonToggle = new GuiButtonHover(-105, 5, 20, 16, 16, CompatibilityTools.translateKey("stackem.icon.cross"), CompatibilityTools.translateKey("stackem.button.remove")));
+        this.controlList.add(this.buttonWebsite = new GuiButtonHover(-106, 5, 20 + 18, 16, 16, CompatibilityTools.translateKey("stackem.icon.info"), CompatibilityTools.translateKey("stackem.button.website")));
+        this.controlList.add(this.buttonMoveDown = new GuiButtonHover(-104, 5 + 18, 20 + 18, 16, 16, CompatibilityTools.translateKey("stackem.icon.moveDown"), CompatibilityTools.translateKey("stackem.button.movedown")));
+        this.controlList.add(this.buttonMoveUp = new GuiButtonHover(-103, 5 + 18, 20, 16, 16, CompatibilityTools.translateKey("stackem.icon.moveUp"), CompatibilityTools.translateKey("stackem.button.moveup")));
 
 
         this.buttonToggle.enabled = false;
@@ -121,7 +118,7 @@ public class GuiTextureStack extends GuiScreen {
 
             if (button.id == -106) {
                 final String website = sequoiaCache.get(this.slotManager.selectedIndex).getWebsite();
-                if (StackEm.isValidWebsite(website)) {
+                if (CompatibilityTools.isValidWebsite(website)) {
                     try {
                         Desktop.getDesktop().browse(new URI(website));
                     } catch (IOException | URISyntaxException ignored) {
@@ -168,8 +165,8 @@ public class GuiTextureStack extends GuiScreen {
         if (sequoiaCache.get(index).isInStack()) {
             this.buttonToggle.enabled = true;
             this.buttonToggle.enabled2 = true;
-            this.buttonToggle.displayString = "\u00A74\u274C";
-            this.buttonToggle.hoverString = StringTranslate.getInstance().translateKey("stackem.button.remove");
+            this.buttonToggle.displayString = CompatibilityTools.translateKey("stackem.icon.cross");
+            this.buttonToggle.hoverString = CompatibilityTools.translateKey("stackem.button.remove");
 
             //todo fix buttons location
             //final int slotOffsetY = this.height / 2 - (this.sequoiaCache.size() * 18) - 9;
@@ -186,8 +183,8 @@ public class GuiTextureStack extends GuiScreen {
         } else {
             this.buttonToggle.enabled = true;
             this.buttonToggle.enabled2 = true;
-            this.buttonToggle.displayString = "\u00A7a\u2714";
-            this.buttonToggle.hoverString = StringTranslate.getInstance().translateKey("stackem.button.add");
+            this.buttonToggle.displayString = CompatibilityTools.translateKey("stackem.icon.tick");
+            this.buttonToggle.hoverString = CompatibilityTools.translateKey("stackem.button.add");
 
             this.buttonMoveUp.enabled = false;
             this.buttonMoveUp.enabled2 = false;
@@ -195,19 +192,19 @@ public class GuiTextureStack extends GuiScreen {
             this.buttonMoveDown.enabled2 = false;
             this.buttonWebsite.enabled2 = true;
 
-            this.buttonWebsite.hoverString = StringTranslate.getInstance().translateKey("stackem.button.website.0");
+            this.buttonWebsite.hoverString = CompatibilityTools.translateKey("stackem.button.website.0");
         }
 
         //info button process
         final PreviewTexturePack pack = sequoiaCache.get(index);
-        this.buttonWebsite.enabled = StackEm.isValidWebsite(pack.getWebsite());
+        this.buttonWebsite.enabled = CompatibilityTools.isValidWebsite(pack.getWebsite());
 
         if (pack.hasAuthors() && pack.hasWebsite()) {
-            this.buttonWebsite.hoverString = StringTranslate.getInstance().translateKeyFormat("stackem.button.website.2", String.join(",", pack.getAuthors()));
+            this.buttonWebsite.hoverString = CompatibilityTools.translateKey("stackem.button.website.2", String.join(",", pack.getAuthors()));
         } else if (pack.hasAuthors()) {
-            this.buttonWebsite.hoverString = StringTranslate.getInstance().translateKeyFormat("stackem.button.website.1", String.join(",", pack.getAuthors()));
+            this.buttonWebsite.hoverString = CompatibilityTools.translateKey("stackem.button.website.1", String.join(",", pack.getAuthors()));
         } else {
-            this.buttonWebsite.hoverString = StringTranslate.getInstance().translateKey("stackem.button.website.0");
+            this.buttonWebsite.hoverString = CompatibilityTools.translateKey("stackem.button.website.0");
         }
     }
 
@@ -233,7 +230,7 @@ public class GuiTextureStack extends GuiScreen {
         }
 
         this.sequoiaCache = candidates;
-        this.sequoiaCache.forEach(pack -> pack.bakeCategoryList(StringTranslate.getInstance()::translateKey));
+        this.sequoiaCache.forEach(pack -> pack.bakeCategoryList(CompatibilityTools::translateKey));
         this.pushSequoiaCacheSort();
     }
 

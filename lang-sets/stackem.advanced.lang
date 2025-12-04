@@ -1,0 +1,40 @@
+# StackEm - Advanced (NFC/ReIndev) MC lang set
+# created by tracystacktrace
+
+# GUI elements/labels
+stackem.gui.done=§c§lSAVE§r & Exit
+stackem.gui.folder=Open Folder
+stackem.gui.hint1=Double-click a texture pack to include/remove
+stackem.gui.hint2=Only "§e.zip§r" texturepacks are §esupported§r!
+stackem.gui.actions=Actions:
+
+# icons
+stackem.icon.folder=§9☄
+stackem.icon.info=§bℹ
+stackem.icon.cross=§4❌
+stackem.icon.tick=§a✔
+stackem.icon.moveUp=§9↑
+stackem.icon.moveDown=§9↓
+
+# buttons hint
+stackem.button.add=Add to stack
+stackem.button.remove=Remove from stack
+stackem.button.moveup=Move up
+stackem.button.movedown=Move down
+stackem.button.website.0=Open texturepack website
+stackem.button.website.1=Author: %s
+stackem.button.website.2=Author: %s (click to open website)
+
+# categories
+stackem.category.audio=§e♫ Audio
+stackem.category.blocks=§1⛏ Blocks
+stackem.category.entities=§3⛨ Entities
+stackem.category.environment=§b❄ Environment
+stackem.category.fonts=§5Ⓐ Fonts
+stackem.category.gui=§a☈ GUI
+stackem.category.items=§b⚔ Items
+stackem.category.paintings=§e░ Paintings
+stackem.category.animation=§d☄ Animations
+stackem.category.queer=§c❤ Queer!
+stackem.category.hud=§b☈ HUD
+stackem.category.qol=§e☺ QoL Changes

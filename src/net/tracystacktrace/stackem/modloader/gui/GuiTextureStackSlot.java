@@ -88,7 +88,7 @@ public class GuiTextureStackSlot extends GuiSlot {
         }
 
         if (tag.isInStack()) {
-            parentScreen.drawGradientRectPublic(x, y, x + 316, y + 32, 0xC0903AA2, 0xC0903AA2);
+            parentScreen.drawGradientRectPublic(x, y, x + 216, y + 32, 0xC0903AA2, 0xC0903AA2);
         }
 
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
