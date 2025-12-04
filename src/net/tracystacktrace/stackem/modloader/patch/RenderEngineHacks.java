@@ -1,4 +1,4 @@
-package net.tracystacktrace.stackem.modloader;
+package net.tracystacktrace.stackem.modloader.patch;
 
 import net.minecraft.src.RenderEngine;
 

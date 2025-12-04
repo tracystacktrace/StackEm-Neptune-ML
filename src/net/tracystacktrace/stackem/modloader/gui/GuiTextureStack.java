@@ -5,7 +5,7 @@ import net.minecraft.src.GuiButton;
 import net.minecraft.src.GuiScreen;
 import net.minecraft.src.TexturePackDefault;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
-import net.tracystacktrace.stackem.modloader.CompatibilityTools;
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
 import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;

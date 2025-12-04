@@ -1,5 +1,7 @@
 package net.tracystacktrace.stackem.modloader;
 
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

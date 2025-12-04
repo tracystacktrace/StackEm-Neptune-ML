@@ -3,10 +3,11 @@ package net.minecraft.src;
 import net.minecraft.client.Minecraft;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
-import net.tracystacktrace.stackem.modloader.CompatibilityTools;
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.gui.GuiTextureStack;
 import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentsProvider;
+import net.tracystacktrace.stackem.modloader.patch.QuickEntityRenderer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class mod_StackEmNeptune extends BaseMod {
+
     @Override
     public String Version() {
         return "1.0";
@@ -34,16 +36,39 @@ public class mod_StackEmNeptune extends BaseMod {
     }
 
     public mod_StackEmNeptune() {
-        CompatibilityTools.log("Initializing mod, progress 2/2");
-        ModLoader.SetInGUIHook(this, true, true);
+    }
+
+    public static void doTick(Minecraft client) {
+        if (client.currentScreen != null && client.currentScreen.getClass().isAssignableFrom(GuiTexturePacks.class)) {
+            client.displayGuiScreen(new GuiTextureStack(((GuiTexturePacks) client.currentScreen).guiScreen));
+        }
     }
 
     @Override
-    public boolean OnTickInGUI(Minecraft game, GuiScreen current) {
-        if (game.currentScreen != null && game.currentScreen.getClass().isAssignableFrom(GuiTexturePacks.class)) {
-            game.displayGuiScreen(new GuiTextureStack(((GuiTexturePacks) game.currentScreen).guiScreen));
+    public boolean OnTickInGame(Minecraft client) {
+        if (client.currentScreen != null && client.currentScreen.getClass().isAssignableFrom(GuiTexturePacks.class)) {
+            client.displayGuiScreen(new GuiTextureStack(((GuiTexturePacks) client.currentScreen).guiScreen));
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    @Override
+    public boolean OnTickInGUI(Minecraft client, GuiScreen gui) {
+        if (gui != null && gui.getClass().isAssignableFrom(GuiTexturePacks.class)) {
+            client.displayGuiScreen(new GuiTextureStack(((GuiTexturePacks) gui).guiScreen));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void ModsLoaded() {
+        if(!(ModLoader.getMinecraftInstance().entityRenderer instanceof QuickEntityRenderer)) {
+            CompatibilityTools.log("Warning! Something cancelled custom EntityRenderer code; are you using OverrideAPI?");
+            ModLoader.SetInGameHook(this, true, true);
+            ModLoader.SetInGUIHook(this, true, true);
+        }
     }
 
     static {
@@ -56,8 +81,11 @@ public class mod_StackEmNeptune extends BaseMod {
             CompatibilityTools.log("Running in DEV environment, no obfuscation present!");
         }
 
-        CompatibilityTools.log("Initializing mod, progress 1/2");
+        CompatibilityTools.log("Initializing mod, applying required patches");
         final Minecraft client = ModLoader.getMinecraftInstance();
+
+        // Apply quick proxy for faster tick processing
+        client.entityRenderer = new QuickEntityRenderer(client);
 
         // Quickly form config folder
         final File configFolder = new File(Minecraft.getMinecraftDir(), "config");

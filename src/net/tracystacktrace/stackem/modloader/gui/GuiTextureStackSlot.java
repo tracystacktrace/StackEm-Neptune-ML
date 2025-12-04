@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.GuiSlot;
 import net.minecraft.src.RenderEngine;
 import net.minecraft.src.Tessellator;
-import net.tracystacktrace.stackem.modloader.CompatibilityTools;
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
 import org.lwjgl.opengl.GL11;
 

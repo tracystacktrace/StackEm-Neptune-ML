@@ -1,6 +1,6 @@
 package net.tracystacktrace.stackem.modloader.imageglue.segment;
 
-import net.tracystacktrace.stackem.modloader.CompatibilityTools;
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 
 import java.io.BufferedReader;
 import java.io.IOException;

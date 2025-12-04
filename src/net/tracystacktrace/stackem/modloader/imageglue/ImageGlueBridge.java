@@ -3,9 +3,9 @@ package net.tracystacktrace.stackem.modloader.imageglue;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderEngine;
 import net.minecraft.src.TexturePackDefault;
-import net.tracystacktrace.stackem.modloader.CompatibilityTools;
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
-import net.tracystacktrace.stackem.modloader.RenderEngineHacks;
+import net.tracystacktrace.stackem.modloader.patch.RenderEngineHacks;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentedTexture;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentsProvider;
 import net.tracystacktrace.stackem.neptune.container.ZipDrivenTexturePack;
@@ -66,9 +66,9 @@ public class ImageGlueBridge {
         }
 
         if (changesNum != 0) {
-            CompatibilityTools.log(String.format("Overwrote %s image segments for: %s", changesNum, name.texture));
+            CompatibilityTools.log(String.format("Overwrote %s image segments for %s", changesNum, name.texture));
         } else {
-            CompatibilityTools.log(String.format("No image segments gluing candidates were found: %s", name.texture));
+            CompatibilityTools.log(String.format("No image segments gluing candidates were found for %s", name.texture));
         }
 
         //clean-up process
