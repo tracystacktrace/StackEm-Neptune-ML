@@ -42,7 +42,6 @@ public final class CacheConfig {
         }
     }
 
-    @SuppressWarnings("DataFlowIssue")
     public static File[] getPossibleTexturePacks(File gameFolder) {
         final File texturepacksFolder = new File(gameFolder, "texturepacks");
         if (texturepacksFolder.exists() && texturepacksFolder.isDirectory()) {

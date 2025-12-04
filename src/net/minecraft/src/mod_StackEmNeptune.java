@@ -8,7 +8,6 @@ import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentsProvider;
 import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.patch.QuickEntityRenderer;
-import org.lwjgl.opengl.Display;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,6 +17,44 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class mod_StackEmNeptune extends BaseMod {
+
+    public static void applyCachedTexturepackStack(Minecraft client, boolean init, File configFolder) {
+        // Fallback to default texturepack
+
+        final List<File> collector = new ArrayList<>();
+        final String[] candidates = CacheConfig.getCacheData(configFolder);
+        final File[] files = CacheConfig.getPossibleTexturePacks(Minecraft.getMinecraftDir());
+
+        // Stream to collect enough data
+        Arrays.stream(candidates)
+                .map(c -> Arrays.stream(files)
+                        .filter(f -> f.getName().toLowerCase().endsWith(".zip"))
+                        .filter(f -> f.getName().contains(c))
+                        .findFirst()
+                        .orElse(null))
+                .filter(Objects::nonNull)
+                .forEach(collector::add);
+
+        if (init) {
+            CompatibilityTools.log("How many texturepacks were pre-fetched? " + collector.size());
+        }
+
+        if (client.texturePackList.selectedTexturePack != null) {
+            client.texturePackList.selectedTexturePack.closeTexturePackFile();
+        }
+        client.texturePackList.selectedTexturePack = new TexturePackDefault();
+
+        // Force set current texturepack as StackEm internal implementation
+        if (init) {
+            client.texturePackList.selectedTexturePack = new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector);
+            client.texturePackList.selectedTexturePack.func_6482_a();
+        } else {
+            client.texturePackList.setTexturePack(new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector));
+        }
+        client.renderEngine.refreshTextures();
+
+        ImageGlueBridge.processTexturesSegments(client.renderEngine);
+    }
 
     @Override
     public String Version() {
@@ -37,12 +74,6 @@ public class mod_StackEmNeptune extends BaseMod {
     }
 
     public mod_StackEmNeptune() {
-    }
-
-    public static void doTick(Minecraft client) {
-        if (client.currentScreen != null && client.currentScreen.getClass().isAssignableFrom(GuiTexturePacks.class)) {
-            client.displayGuiScreen(new GuiTextureStack(((GuiTexturePacks) client.currentScreen).guiScreen));
-        }
     }
 
     @Override
@@ -78,7 +109,7 @@ public class mod_StackEmNeptune extends BaseMod {
         CompatibilityTools.loadingPresentLang();
         SegmentsProvider.loadSegmentsData();
 
-        if (CompatibilityTools.OBFUSCATED_ENV) {
+        if (!CompatibilityTools.OBFUSCATED_ENV) {
             CompatibilityTools.log("Running in DEV environment, no obfuscation present!");
         }
 
@@ -94,38 +125,6 @@ public class mod_StackEmNeptune extends BaseMod {
             configFolder.mkdirs();
         }
 
-        mod_StackEmNeptune.applyCachedTexturepackStack(client, true, configFolder);
-    }
-
-    public static void applyCachedTexturepackStack(Minecraft client, boolean init, File configFolder) {
-        // Fallback to default texturepack
-        client.texturePackList.selectedTexturePack.closeTexturePackFile();
-        client.texturePackList.selectedTexturePack = new TexturePackDefault();
-
-        final List<File> collector = new ArrayList<>();
-        final String[] candidates = CacheConfig.getCacheData(configFolder);
-        final File[] files = CacheConfig.getPossibleTexturePacks(Minecraft.getMinecraftDir());
-
-        // Stream to collect enough data
-        Arrays.stream(candidates)
-                .map(c -> Arrays.stream(files)
-                        .filter(f -> f.getName().toLowerCase().endsWith(".zip"))
-                        .filter(f -> f.getName().contains(c))
-                        .findFirst()
-                        .orElse(null))
-                .filter(Objects::nonNull)
-                .forEach(collector::add);
-
-        if (init) {
-            CompatibilityTools.log("How many texturepacks were pre-fetched? " + collector.size());
-        }
-
-        // Force set current texturepack as StackEm internal implementation
-        client.texturePackList.setTexturePack(new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector));
-        client.renderEngine.refreshTextures();
-
-        ImageGlueBridge.processTexturesSegments(client.renderEngine);
-        //client.renderGlobal.loadRenderers();
-        Display.update();
+        applyCachedTexturepackStack(client, true, configFolder);
     }
 }

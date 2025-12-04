@@ -1,5 +1,6 @@
 package net.tracystacktrace.stackem.neptune.fetch;
 
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
 import net.tracystacktrace.stackem.tools.NeptuneProperties;
 import net.tracystacktrace.stackem.tools.SafetyTools;
@@ -74,7 +75,7 @@ public final class FetchMaster {
 
             // If pack.txt is empty - ignore
             if (packTxtContent == null) {
-                System.out.printf("[Stack 'Em] File does not contain pack.txt: %s\n", texturepackFile.getName());
+                CompatibilityTools.log(String.format("File %s does not contain pack.txt, ignoring", texturepackFile.getName()));
                 return null;
             }
 
