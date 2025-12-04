@@ -18,6 +18,7 @@ import java.util.Map;
 public final class CompatibilityTools {
     private static final Map<String, String> ownTranslateKey = new HashMap<>();
     public static boolean RESIZABLE_WIDTH = false;
+    public static boolean OBFUSCATED_ENV = true;
     private static final DateTimeFormatter HHMMSS_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     public static void log(String message) {
@@ -34,6 +35,8 @@ public final class CompatibilityTools {
     }
 
     public static void getKnownWithEnvironment() {
+        OBFUSCATED_ENV = !classExists("net.minecraft.src.ModLoader");
+
         if (classExists("net.minecraft.src.mod_NFC") || classExists("mod_NFC")) {
             CompatibilityTools.log("Detected NFC! GuiSlot width extension allowed");
             RESIZABLE_WIDTH = true;

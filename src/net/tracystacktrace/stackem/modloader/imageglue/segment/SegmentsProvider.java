@@ -58,7 +58,7 @@ public final class SegmentsProvider {
         final String[] rawStrings = s.substring(1, s.length() - 1).split(",");
         final int[] cookedInts = new int[rawStrings.length];
         for (int i = 0; i < cookedInts.length; i++) {
-            cookedInts[i] = Integer.parseInt(rawStrings[i]);
+            cookedInts[i] = Integer.parseInt(rawStrings[i].trim());
         }
         return cookedInts;
     }

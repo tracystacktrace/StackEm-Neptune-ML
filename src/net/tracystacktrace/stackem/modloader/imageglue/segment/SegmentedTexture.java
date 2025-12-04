@@ -1,9 +1,8 @@
 package net.tracystacktrace.stackem.modloader.imageglue.segment;
 
-import org.jetbrains.annotations.NotNull;
 
 public class SegmentedTexture {
-    protected final String texture;
+    public final String texture;
     public final int[][] segments;
 
     public SegmentedTexture(String texture, int[][] segments) {
@@ -14,7 +13,7 @@ public class SegmentedTexture {
     /**
      * Provides an empty array with the length equivalent to number of segments
      */
-    public boolean @NotNull [] genEmptyArray() {
+    public boolean [] genEmptyArray() {
         return new boolean[this.segments.length];
     }
 

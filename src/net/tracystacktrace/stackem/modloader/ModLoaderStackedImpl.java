@@ -3,6 +3,7 @@ package net.tracystacktrace.stackem.modloader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.TexturePackBase;
 import net.tracystacktrace.stackem.neptune.StackedIO;
+import net.tracystacktrace.stackem.neptune.container.ZipDrivenTexturePack;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,5 +58,13 @@ public class ModLoaderStackedImpl extends TexturePackBase {
         } catch (IOException ignored) {
         }
         return defaultTexturePack.getResourceAsStream(resourcePath);
+    }
+
+    public TexturePackBase getDefaultTexturePack() {
+        return this.defaultTexturePack;
+    }
+
+    public ZipDrivenTexturePack[] getArchives() {
+        return this.engine.getArchives();
     }
 }

@@ -3,7 +3,6 @@ package net.tracystacktrace.stackem.modloader.imageglue;
 import net.minecraft.client.Minecraft;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentedTexture;
 import net.tracystacktrace.stackem.tools.ImageHelper;
-import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -16,7 +15,7 @@ public class ImageGlueContainer {
 
     private final int original_width;
 
-    public ImageGlueContainer(@NotNull final BufferedImage image) {
+    public ImageGlueContainer(final BufferedImage image) {
         this.original = image;
         //basically copy the image into an independent object
         this.canvas = ImageHelper.fullCopy(image);
@@ -34,7 +33,7 @@ public class ImageGlueContainer {
         return false; //signal to scale not the original, but modified version
     }
 
-    public int makeChanges(@NotNull BufferedImage attempt, @NotNull SegmentedTexture holder) {
+    public int makeChanges(BufferedImage attempt, SegmentedTexture holder) {
         if (attempt.getWidth() != this.original.getWidth()) {
             if (!rescaleContainer(attempt.getWidth(), attempt.getHeight())) {
                 attempt = ImageHelper.scaleImage(attempt, original.getWidth(), original.getHeight());
@@ -85,7 +84,7 @@ public class ImageGlueContainer {
         this.original.flush();
     }
 
-    public void debugSave(@NotNull String name) {
+    public void debugSave(String name) {
         try {
             ImageIO.write(canvas, "png", new File(Minecraft.getMinecraftDir(), name + ".png"));
         } catch (IOException e) {

@@ -7,6 +7,7 @@ import net.minecraft.src.TexturePackDefault;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
+import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
 import net.tracystacktrace.stackem.neptune.fetch.FetchMaster;
 import org.lwjgl.opengl.Display;
@@ -303,6 +304,7 @@ public class GuiTextureStack extends GuiScreen {
         this.mc.texturePackList.setTexturePack(stacked);
 
         this.mc.renderEngine.refreshTextures();
+        ImageGlueBridge.processTexturesSegments(this.mc.renderEngine);
         this.mc.renderGlobal.loadRenderers();
         //this.mc.fontRenderer = new FontRenderer(StackEm.getContainerInstance(), this.mc.renderEngine);
 

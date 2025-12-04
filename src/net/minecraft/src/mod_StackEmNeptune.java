@@ -5,6 +5,8 @@ import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
 import net.tracystacktrace.stackem.modloader.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.gui.GuiTextureStack;
+import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
+import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentsProvider;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -48,6 +50,11 @@ public class mod_StackEmNeptune extends BaseMod {
         CompatibilityTools.log("Preparing the environment, thinking very hard!");
         CompatibilityTools.getKnownWithEnvironment();
         CompatibilityTools.loadingPresentLang();
+        SegmentsProvider.loadSegmentsData();
+
+        if(CompatibilityTools.OBFUSCATED_ENV) {
+            CompatibilityTools.log("Running in DEV environment, no obfuscation present!");
+        }
 
         CompatibilityTools.log("Initializing mod, progress 1/2");
         final Minecraft client = ModLoader.getMinecraftInstance();
@@ -79,5 +86,7 @@ public class mod_StackEmNeptune extends BaseMod {
 
         // Force set current texturepack as StackEm internal implementation
         client.texturePackList.selectedTexturePack = new ModLoaderStackedImpl(client.texturePackList.selectedTexturePack, collector);
+
+        ImageGlueBridge.processTexturesSegments(client.renderEngine);
     }
 }
