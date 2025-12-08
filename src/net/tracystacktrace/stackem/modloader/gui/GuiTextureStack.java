@@ -12,7 +12,6 @@ import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
 import net.tracystacktrace.stackem.neptune.fetch.FetchMaster;
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.io.File;
@@ -205,14 +204,7 @@ public class GuiTextureStack extends GuiScreen {
         //info button process
         final PreviewTexturePack pack = sequoiaCache.get(index);
         this.buttonWebsite.enabled = CompatibilityTools.isValidWebsite(pack.getWebsite());
-
-        if (pack.hasAuthors() && pack.hasWebsite()) {
-            this.buttonWebsite.hoverString = CompatibilityTools.translateKey("stackem.button.website.2", String.join(",", pack.getAuthors()));
-        } else if (pack.hasAuthors()) {
-            this.buttonWebsite.hoverString = CompatibilityTools.translateKey("stackem.button.website.1", String.join(",", pack.getAuthors()));
-        } else {
-            this.buttonWebsite.hoverString = CompatibilityTools.translateKey("stackem.button.website.0");
-        }
+        this.buttonWebsite.hoverString = CompatibilityTools.translateKey("stackem.button.website");
     }
 
     /* code to obtain info from outside */
@@ -237,7 +229,6 @@ public class GuiTextureStack extends GuiScreen {
         }
 
         this.sequoiaCache = candidates;
-        this.sequoiaCache.forEach(pack -> pack.bakeCategoryList(CompatibilityTools::translateKey));
         this.pushSequoiaCacheSort();
     }
 
@@ -334,27 +325,6 @@ public class GuiTextureStack extends GuiScreen {
         this.pushSequoiaCacheSort();
         slotManager.elementClicked(index + 1, false);
     }
-
-//    protected void renderCategoriesTooltip(int x, int y, PreviewTexturePack tag) {
-//        GL11.glPushMatrix();
-//        GL11.glTranslated(0.0, 0.0, 90.0);
-//
-//        final String[] data = tag.getBakedCategories();
-//        final int sizeY = 12 * data.length;
-//        int sizeX = 0;
-//
-//        for (int i = 0; i < data.length; i++) {
-//            sizeX = Math.max(sizeX, fontRenderer.getStringWidth(data[i]));
-//        }
-//
-//        this.drawGradientRect(x + 5, y + 5, x + 8 + sizeX + 3, y + 8 + sizeY, -1073741824, -1073741824);
-//
-//        for (int i = 0; i < data.length; i++) {
-//            fontRenderer.drawString(data[i], x + 8, y + 8 + (i * 12), 16777120);
-//        }
-//
-//        GL11.glPopMatrix();
-//    }
 
     public void drawGradientRectPublic(int var1, int var2, int var3, int var4, int var5, int var6) {
         this.drawGradientRect(var1, var2, var3, var4, var5, var6);

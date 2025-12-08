@@ -52,9 +52,7 @@ public class ModLoaderStackedImpl extends TexturePackBase {
     @Override
     public InputStream getResourceAsStream(String resourcePath) {
         try {
-            if (this.engine != null) {
-                return this.engine.getInputStream(resourcePath);
-            }
+            return this.engine.getInputStream(resourcePath);
         } catch (IOException ignored) {
         }
         return defaultTexturePack.getResourceAsStream(resourcePath);

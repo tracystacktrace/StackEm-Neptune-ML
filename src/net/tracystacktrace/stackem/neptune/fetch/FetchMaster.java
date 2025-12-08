@@ -2,17 +2,14 @@ package net.tracystacktrace.stackem.neptune.fetch;
 
 import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
-import net.tracystacktrace.stackem.tools.NeptuneProperties;
 import net.tracystacktrace.stackem.tools.SafetyTools;
 import net.tracystacktrace.stackem.tools.ZipFileHelper;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public final class FetchMaster {
@@ -100,40 +97,12 @@ public final class FetchMaster {
                 pack.setIcon(packPngImage);
             }
 
-            // Try to read stackem.properties
-            FetchMaster.setPossibleProperties(zipFile, pack);
-
             zipFile.close();
             return pack;
         } catch (IOException e) {
             System.out.printf("Failed to process \"%s\" texturepack, reason: %s\n", texturepackFile.getName(), e.getMessage());
             e.printStackTrace();
             return null;
-        }
-    }
-
-    private static void setPossibleProperties(ZipFile zipFile, PreviewTexturePack pack) {
-        final ZipEntry stackemCfgZipEntry = zipFile.getEntry("stackem.properties");
-        if (stackemCfgZipEntry != null) {
-            try {
-                final InputStream stackemCfgInputStream = zipFile.getInputStream(stackemCfgZipEntry);
-                final NeptuneProperties properties = new NeptuneProperties();
-                properties.open(stackemCfgInputStream);
-                stackemCfgInputStream.close();
-
-                final String target_game = properties.getString("target_game");
-                final String website = properties.getString("website");
-                final String[] authors = properties.getStringArray("authors");
-                final String[] custom_category = properties.getStringArray("custom_category");
-                final String[] category = properties.getStringArray("category");
-
-                //put them here
-                pack.setStackemData(target_game, website, authors, custom_category, category);
-
-            } catch (IOException e) {
-                System.out.printf("Failed to process [stackem.properties] of %s, reason: %s\n", pack.getName(), e.getMessage());
-                e.printStackTrace();
-            }
         }
     }
 }

@@ -21,20 +21,4 @@ stackem.button.add=Add to stack
 stackem.button.remove=Remove from stack
 stackem.button.moveup=Move up
 stackem.button.movedown=Move down
-stackem.button.website.0=Open texturepack website
-stackem.button.website.1=Author: %s
-stackem.button.website.2=Author: %s (click to open website)
-
-# categories
-stackem.category.audio=§eAudio
-stackem.category.blocks=§1Blocks
-stackem.category.entities=§3Entities
-stackem.category.environment=§bEnvironment
-stackem.category.fonts=§5Fonts
-stackem.category.gui=§aGUI
-stackem.category.items=§bItems
-stackem.category.paintings=§ePaintings
-stackem.category.animation=§dAnimations
-stackem.category.queer=§cQueer!
-stackem.category.hud=§bHUD
-stackem.category.qol=§eQoL Changes
+stackem.button.website=Open texturepack website
