@@ -45,9 +45,9 @@ public final class CompatibilityTools {
     }
 
     public static void obtainCurrentLang() {
-        final InputStream inputStream = CompatibilityTools.class.getResourceAsStream("/stackem.default.lang");
+        final InputStream inputStream = CompatibilityTools.class.getResourceAsStream("/stackem.lang");
         if (inputStream == null) {
-            CompatibilityTools.log("Couldn't find stackem.default.lang! Corrupted mod zip?");
+            CompatibilityTools.log("Couldn't find stackem.lang! Corrupted mod zip?");
             return;
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
@@ -61,7 +61,7 @@ public final class CompatibilityTools {
                 ownTranslateKey.put(rawSplit[0], rawSplit[1]);
             }
         } catch (IOException e) {
-            CompatibilityTools.log("Failed to load stackem.default.lang, expect problems: " + e.getMessage());
+            CompatibilityTools.log("Failed to load stackem.lang, expect problems: " + e.getMessage());
             e.printStackTrace();
         }
     }
