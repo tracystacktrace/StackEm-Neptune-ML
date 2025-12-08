@@ -21,4 +21,4 @@ stackem.button.add=Add to stack
 stackem.button.remove=Remove from stack
 stackem.button.moveup=Move up
 stackem.button.movedown=Move down
-stackem.button.website=Open texturepack website
+stackem.button.sha256=Copy SHA-256 of ZIP

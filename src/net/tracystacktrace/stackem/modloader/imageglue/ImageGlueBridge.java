@@ -3,11 +3,11 @@ package net.tracystacktrace.stackem.modloader.imageglue;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.RenderEngine;
 import net.minecraft.src.TexturePackDefault;
-import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
-import net.tracystacktrace.stackem.modloader.patch.RenderEngineHacks;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentedTexture;
 import net.tracystacktrace.stackem.modloader.imageglue.segment.SegmentsProvider;
+import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
+import net.tracystacktrace.stackem.modloader.patch.RenderEngineHacks;
 import net.tracystacktrace.stackem.neptune.container.ZipDrivenTexturePack;
 import net.tracystacktrace.stackem.tools.ImageHelper;
 

@@ -13,7 +13,7 @@ public final class RenderEngineHacks {
             //textureMap	b
             final Field field0 = RenderEngine.class.getDeclaredField(CompatibilityTools.OBFUSCATED_ENV ? "b" : "textureMap");
             field0.setAccessible(true);
-            return ((Map)field0.get(renderEngine)).containsKey(s);
+            return ((Map) field0.get(renderEngine)).containsKey(s);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -24,7 +24,7 @@ public final class RenderEngineHacks {
             //textureMap	b
             final Field field0 = RenderEngine.class.getDeclaredField(CompatibilityTools.OBFUSCATED_ENV ? "b" : "textureMap");
             field0.setAccessible(true);
-            return (int) ((Map)field0.get(renderEngine)).get(s);
+            return (int) ((Map) field0.get(renderEngine)).get(s);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -35,7 +35,7 @@ public final class RenderEngineHacks {
             //textureMap	b
             final Field field0 = RenderEngine.class.getDeclaredField(CompatibilityTools.OBFUSCATED_ENV ? "b" : "textureMap");
             field0.setAccessible(true);
-            ((Map)field0.get(renderEngine)).put(s, i);
+            ((Map) field0.get(renderEngine)).put(s, i);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }

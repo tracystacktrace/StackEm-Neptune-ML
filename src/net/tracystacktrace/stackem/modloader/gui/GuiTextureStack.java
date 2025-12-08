@@ -11,13 +11,12 @@ import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
 import net.tracystacktrace.stackem.modloader.patch.CompatibilityTools;
 import net.tracystacktrace.stackem.neptune.container.PreviewTexturePack;
 import net.tracystacktrace.stackem.neptune.fetch.FetchMaster;
+import net.tracystacktrace.stackem.tools.SafetyTools;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class GuiTextureStack extends GuiScreen {
     private GuiButtonHover buttonMoveUp;
     private GuiButtonHover buttonMoveDown;
     private GuiButtonHover buttonToggle;
-    private GuiButtonHover buttonWebsite;
+    private GuiButtonHover buttonSecurityString;
 
     private boolean clickedAtLeastOnce;
     private boolean anyChangesMade = false;
@@ -67,7 +66,7 @@ public class GuiTextureStack extends GuiScreen {
 
         // action buttons
         this.controlList.add(this.buttonToggle = new GuiButtonHover(-105, 5, 20 + 46, 16, 16, CompatibilityTools.translateKey("stackem.icon.cross"), CompatibilityTools.translateKey("stackem.button.remove")));
-        this.controlList.add(this.buttonWebsite = new GuiButtonHover(-106, 5, 20 + 64, 16, 16, CompatibilityTools.translateKey("stackem.icon.info"), CompatibilityTools.translateKey("stackem.button.website")));
+        this.controlList.add(this.buttonSecurityString = new GuiButtonHover(-106, 5, 20 + 64, 16, 16, CompatibilityTools.translateKey("stackem.icon.info"), CompatibilityTools.translateKey("stackem.button.sha256")));
         this.controlList.add(this.buttonMoveDown = new GuiButtonHover(-104, 5, 20 + 18, 16, 16, CompatibilityTools.translateKey("stackem.icon.moveDown"), CompatibilityTools.translateKey("stackem.button.movedown")));
         this.controlList.add(this.buttonMoveUp = new GuiButtonHover(-103, 5, 20, 16, 16, CompatibilityTools.translateKey("stackem.icon.moveUp"), CompatibilityTools.translateKey("stackem.button.moveup")));
 
@@ -81,9 +80,9 @@ public class GuiTextureStack extends GuiScreen {
         this.buttonMoveDown.enabled = false;
         this.buttonMoveDown.enabled2 = false;
         this.buttonMoveDown.canDisplayInfo = true;
-        this.buttonWebsite.enabled = false;
-        this.buttonWebsite.enabled2 = false;
-        this.buttonWebsite.canDisplayInfo = true;
+        this.buttonSecurityString.enabled = false;
+        this.buttonSecurityString.enabled2 = false;
+        this.buttonSecurityString.canDisplayInfo = true;
     }
 
     @Override
@@ -121,12 +120,9 @@ public class GuiTextureStack extends GuiScreen {
             }
 
             if (button.id == -106) {
-                final String website = sequoiaCache.get(this.slotManager.selectedIndex).getWebsite();
-                if (CompatibilityTools.isValidWebsite(website)) {
-                    try {
-                        Desktop.getDesktop().browse(new URI(website));
-                    } catch (IOException | URISyntaxException ignored) {
-                    }
+                final String securityString = sequoiaCache.get(this.slotManager.selectedIndex).sha256;
+                if (securityString != null && !securityString.equals("N/A")) {
+                    SafetyTools.setClipboardText(securityString);
                 }
                 return;
             }
@@ -181,7 +177,6 @@ public class GuiTextureStack extends GuiScreen {
 
             this.buttonMoveUp.enabled2 = true;
             this.buttonMoveDown.enabled2 = true;
-            this.buttonWebsite.enabled2 = true;
 
             this.buttonMoveUp.enabled = index > 0;
             this.buttonMoveDown.enabled = index + 1 < this.countInStackElements();
@@ -196,15 +191,11 @@ public class GuiTextureStack extends GuiScreen {
             this.buttonMoveUp.enabled2 = false;
             this.buttonMoveDown.enabled = false;
             this.buttonMoveDown.enabled2 = false;
-            this.buttonWebsite.enabled2 = true;
-
-            this.buttonWebsite.hoverString = CompatibilityTools.translateKey("stackem.button.website.0");
         }
 
-        //info button process
-        final PreviewTexturePack pack = sequoiaCache.get(index);
-        this.buttonWebsite.enabled = CompatibilityTools.isValidWebsite(pack.getWebsite());
-        this.buttonWebsite.hoverString = CompatibilityTools.translateKey("stackem.button.website");
+        final PreviewTexturePack texturePack = sequoiaCache.get(index);
+        this.buttonSecurityString.enabled = texturePack.sha256 != null && !"N/A".equals(texturePack.sha256);
+        this.buttonSecurityString.enabled2 = true;
     }
 
     /* code to obtain info from outside */

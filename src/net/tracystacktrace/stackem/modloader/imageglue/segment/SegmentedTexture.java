@@ -13,7 +13,7 @@ public class SegmentedTexture {
     /**
      * Provides an empty array with the length equivalent to number of segments
      */
-    public boolean [] genEmptyArray() {
+    public boolean[] genEmptyArray() {
         return new boolean[this.segments.length];
     }
 

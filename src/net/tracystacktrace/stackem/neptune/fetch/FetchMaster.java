@@ -58,7 +58,9 @@ public final class FetchMaster {
         try {
             sha256 = SafetyTools.getSHA256(texturepackFile);
         } catch (IOException e) {
-            sha256 = "SHA-256 NOT CALCULATED!!!";
+            sha256 = "N/A";
+            CompatibilityTools.log(String.format("Failed to caclulate SHA-256 for the zip file %s", texturepackFile.getName()));
+            CompatibilityTools.log(e.getMessage());
         }
 
         // Read the inside of the zip file

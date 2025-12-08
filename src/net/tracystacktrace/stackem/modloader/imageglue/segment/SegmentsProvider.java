@@ -47,7 +47,7 @@ public final class SegmentsProvider {
         final String dataLine = rawStrip[1].trim();
 
         // Square automated data generation - no need to manually type of similar pattern textures
-        if(dataLine.startsWith("square_gen")) {
+        if (dataLine.startsWith("square_gen")) {
             final String[] properties = dataLine.split(" ");
 
             final int width = Integer.parseInt(properties[1]);
@@ -59,9 +59,9 @@ public final class SegmentsProvider {
             final int stepsY = canvasHeight / height;
 
             final int[][] genArray = new int[stepsX * stepsY][];
-            for(int i = 0; i < stepsX; i++) {
-                for(int j = 0; j < stepsY; j++) {
-                    genArray[i * stepsX  + j] = new int[] {i * width, j * height, width, height};
+            for (int i = 0; i < stepsX; i++) {
+                for (int j = 0; j < stepsY; j++) {
+                    genArray[i * stepsX + j] = new int[]{i * width, j * height, width, height};
                 }
             }
 
