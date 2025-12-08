@@ -1,10 +1,7 @@
 package net.tracystacktrace.stackem.modloader.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.GuiButton;
-import net.minecraft.src.GuiScreen;
-import net.minecraft.src.TexturePackDefault;
-import net.minecraft.src.mod_StackEmNeptune;
+import net.minecraft.src.*;
 import net.tracystacktrace.stackem.modloader.CacheConfig;
 import net.tracystacktrace.stackem.modloader.ModLoaderStackedImpl;
 import net.tracystacktrace.stackem.modloader.imageglue.ImageGlueBridge;
@@ -292,6 +289,7 @@ public class GuiTextureStack extends GuiScreen {
 
         this.mc.renderEngine.refreshTextures();
         ImageGlueBridge.processTexturesSegments(this.mc.renderEngine);
+        /* MODLOADER METHOD */ ModLoader.RegisterAllTextureOverrides(this.mc.renderEngine);
         this.mc.renderGlobal.loadRenderers();
 
         //leftovers from StackEm ReIndev

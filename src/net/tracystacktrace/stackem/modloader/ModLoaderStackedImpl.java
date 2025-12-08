@@ -18,6 +18,7 @@ public class ModLoaderStackedImpl extends TexturePackBase {
             TexturePackBase defaultTexturePack,
             List<File> texturepackArchives
     ) {
+        this.texturePackFileName = "stackem-" + Math.random();
         this.defaultTexturePack = defaultTexturePack;
         this.engine = new StackedIO(texturepackArchives);
     }
