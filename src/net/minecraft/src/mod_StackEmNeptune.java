@@ -106,7 +106,7 @@ public class mod_StackEmNeptune extends BaseMod {
     static {
         CompatibilityTools.log("Preparing the environment, thinking very hard!");
         CompatibilityTools.getKnownWithEnvironment();
-        CompatibilityTools.loadingPresentLang();
+        CompatibilityTools.obtainCurrentLang();
         SegmentsProvider.loadSegmentsData();
 
         if (!CompatibilityTools.OBFUSCATED_ENV) {

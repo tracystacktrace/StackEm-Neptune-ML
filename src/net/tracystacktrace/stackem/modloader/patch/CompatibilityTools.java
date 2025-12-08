@@ -44,7 +44,7 @@ public final class CompatibilityTools {
         //TODO: Add compatibility for other mods
     }
 
-    public static void loadingPresentLang() {
+    public static void obtainCurrentLang() {
         final InputStream inputStream = CompatibilityTools.class.getResourceAsStream("/stackem.default.lang");
         if (inputStream == null) {
             CompatibilityTools.log("Couldn't find stackem.default.lang! Corrupted mod zip?");
@@ -64,10 +64,6 @@ public final class CompatibilityTools {
             CompatibilityTools.log("Failed to load stackem.default.lang, expect problems: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    public static boolean isValidWebsite(String website) {
-        return website != null && (website.startsWith("https://") || website.startsWith("http://"));
     }
 
     public static void resizeWidth(GuiSlot slot, int w) {

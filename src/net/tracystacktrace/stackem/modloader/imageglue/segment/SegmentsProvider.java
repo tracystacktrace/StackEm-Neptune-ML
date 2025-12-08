@@ -46,7 +46,7 @@ public final class SegmentsProvider {
 
         final String dataLine = rawStrip[1].trim();
 
-        // Square automated data generation - no need to manually type of similar pattern textures
+        // Square automated data generation - no need to manually type similar pattern textures
         if (dataLine.startsWith("square_gen")) {
             final String[] properties = dataLine.split(" ");
 
