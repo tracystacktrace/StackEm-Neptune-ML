@@ -37,7 +37,6 @@ public class ModLoaderStackedImpl extends TexturePackBase {
     public void func_6485_a(Minecraft client) throws IOException {
         this.firstDescriptionLine = "Stack 'Em Internal Object";
         this.secondDescriptionLine = "Do not touch, use or look.";
-        this.texturePackFileName = "stackem.stackem";
     }
 
     @Override

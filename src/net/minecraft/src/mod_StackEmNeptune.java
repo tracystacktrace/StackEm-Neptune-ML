@@ -54,7 +54,6 @@ public class mod_StackEmNeptune extends BaseMod {
         client.renderEngine.refreshTextures();
 
         ImageGlueBridge.processTexturesSegments(client.renderEngine);
-        /* MODLOADER METHOD */ ModLoader.RegisterAllTextureOverrides(client.renderEngine);
     }
 
     @Override

@@ -289,7 +289,7 @@ public class GuiTextureStack extends GuiScreen {
 
         this.mc.renderEngine.refreshTextures();
         ImageGlueBridge.processTexturesSegments(this.mc.renderEngine);
-        /* MODLOADER METHOD */ ModLoader.RegisterAllTextureOverrides(this.mc.renderEngine);
+        
         this.mc.renderGlobal.loadRenderers();
 
         //leftovers from StackEm ReIndev
