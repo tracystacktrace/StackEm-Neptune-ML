@@ -59,9 +59,4 @@ public class PreviewTexturePack extends ContainerTexturePack {
         }
         return this.iconTextureID;
     }
-
-    @Deprecated
-    public String getWebsite() {
-        return null;
-    }
 }

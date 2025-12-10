@@ -71,7 +71,7 @@ public class mod_StackEmNeptune extends BaseMod {
     }
 
     public String Icon() {
-        return "/net/tracystacktrace/stackem/icon.png";
+        return "/assets/stackemneptune/icon.png";
     }
 
     public mod_StackEmNeptune() {

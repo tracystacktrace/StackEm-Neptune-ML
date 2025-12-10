@@ -15,7 +15,7 @@ public final class SegmentsProvider {
     public static SegmentedTexture[] TEXTURES;
 
     public static void loadSegmentsData() {
-        final InputStream inputStream = CompatibilityTools.class.getResourceAsStream("/stackem.segments.txt");
+        final InputStream inputStream = CompatibilityTools.class.getResourceAsStream("/assets/stackemneptune/stackem.segments.txt");
         if (inputStream == null) {
             CompatibilityTools.log("Couldn't find stackem.segments.txt! Corrupted mod zip?");
             return;

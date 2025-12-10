@@ -1,14 +1,10 @@
 package net.tracystacktrace.stackem.neptune.container;
 
-import net.tracystacktrace.stackem.tools.IntermediateIOException;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -21,7 +17,7 @@ public class ZipDrivenTexturePack extends ContainerTexturePack {
 
     public void openArchive() throws IOException {
         if (this.archive != null) {
-            System.out.println("The openFile failed: the archive is already running over!");
+            System.out.println("Method \"openArchive\" failed: the archive is already open!");
             return;
         }
         this.archive = new ZipFile(this.file);
@@ -77,15 +73,6 @@ public class ZipDrivenTexturePack extends ContainerTexturePack {
             return ImageIO.read(inputStream);
         } catch (IOException ignored) {
             return null;
-        }
-    }
-
-    public String readTextFile(String path) throws IntermediateIOException {
-        try (InputStream inputStream = this.getInputStreamOf(path);
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
-            return reader.lines().collect(Collectors.joining());
-        } catch (IOException e) {
-            throw new IntermediateIOException("Couldn't read file: " + path, e);
         }
     }
 }

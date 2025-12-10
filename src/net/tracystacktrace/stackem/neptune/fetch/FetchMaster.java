@@ -47,12 +47,6 @@ public final class FetchMaster {
             return null;
         }
 
-//        // Check for file being locked
-//        if (SafetyTools.isFileLocked(texturepackFile)) {
-//            System.out.printf("[Stack 'Em] File is locked (ignoring): %s\n", texturepackFile.getName());
-//            return null;
-//        }
-
         // Calculate the SHA-256 of texturepack
         String sha256;
         try {

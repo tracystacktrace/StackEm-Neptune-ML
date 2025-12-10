@@ -22,10 +22,9 @@ public final class SafetyTools {
                 }
             }
 
-            final byte[] hashBytes = digest.digest();
             final StringBuilder hexString = new StringBuilder();
 
-            for (byte b : hashBytes) {
+            for (byte b : digest.digest()) {
                 final String hex = Integer.toHexString(0xff & b);
                 if (hex.length() == 1) hexString.append('0');
                 hexString.append(hex);
