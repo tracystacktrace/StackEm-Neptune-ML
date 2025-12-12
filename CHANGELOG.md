@@ -1,8 +1,9 @@
 
 ## [1.2] - 2025/12/12
-- Do not enforce ModLoader textures load, it does by itself (automatically)
-- A nicer placement of assets, fewer problems for me when it comes to assembling binaries
+- Fixed a critical bug where texture gluing was referencing to incorrect coordinates
 - Replaced slow reflects accessors with `sun.misc.Unsafe` alternatives
+- The mod now doesn't enforce ModLoader textures load, as ML does by itself (automatically)
+- A different structure of assets files, just for convenience
 
 ## [1.1] - 2025/12/08
 - Replaced website button with SHA-256 "copy to clipboard" button
