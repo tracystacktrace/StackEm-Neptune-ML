@@ -66,7 +66,7 @@ public class mod_StackEmNeptune extends BaseMod {
     }
 
     public String Description() {
-        return "Support for stacked texturepacks with runtime texture gluing!";
+        return "Mod that allows to load and use several texturepacks simultaneously, with runtime texture gluing!";
     }
 
     public String Icon() {

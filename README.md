@@ -16,20 +16,21 @@
 
 </div>
 
-![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/ml_b173/docs/screenshot_b173_0.png)
-
-
 **Stack 'Em Neptune** is a compact and lightweight version of original [**Stack 'Em**](https://modrinth.com/mod/stack-em) mod that is designed to provide maximum compatibility for most vanilla/modded minecraft versions.
 
 This is done by using either ModLoader or Forge entrypoints with some Java reflections performed in some places.
 
 **Why so?** Because original Stack 'Em has so many features (a lot :3) available it'd be hard to port and maintain these features in other minecraft versions. Sorry!
 
+![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/ml_b173/docs/screenshot_b173_0.png)
+
 ## Features & Compatibility
 
 Available features are:
 - **Texture Stacking:** you can use several textures by order simultaneously!
 - **Runtime Item Gluing:** now if two texturepacks change the different parts of the same texture (see below), they will be "glued" together.
+
+**Compatible with Optifine, Forge/Reforged for b1.7.3.**
 
 ## Development
 
