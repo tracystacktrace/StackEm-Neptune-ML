@@ -58,7 +58,7 @@ public class mod_StackEmNeptune extends BaseMod {
 
     @Override
     public String Version() {
-        return "1.1";
+        return "1.2";
     }
 
     public String Name() {
