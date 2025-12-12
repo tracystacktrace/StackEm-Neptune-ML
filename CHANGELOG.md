@@ -1,7 +1,8 @@
 
-## [1.2] - 2025/12/??
+## [1.2] - 2025/12/12
 - Do not enforce ModLoader textures load, it does by itself (automatically)
 - A nicer placement of assets, fewer problems for me when it comes to assembling binaries
+- Replaced slow reflects accessors with `sun.misc.Unsafe` alternatives
 
 ## [1.1] - 2025/12/08
 - Replaced website button with SHA-256 "copy to clipboard" button
