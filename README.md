@@ -1,9 +1,12 @@
 
 > [!WARNING]  
-> It is important to say that this repository contains source code primarily for ModLoader supported b1.7.3 clients, i.e. vanilla and NFC.
+> This source set of Stack 'Em Neptune is supported on following environments:
+> - **ModLoader `b1.7.3`**: `-ml` suffix.
+> - **NFC `b1.7.3`**: `-nfc` suffix.
 >
-> For other versions, like Forge or NilLoader ones, please refer to these repositories:
-> (placeholder :3, WIP)
+> For other supported minecraft versions ports, please follow these links: <br>
+> **b1.7.3**: https://github.com/tracystacktrace/StackEm-Neptune-ML <br>
+> **1.2.5**: https://github.com/tracystacktrace/StackEm-Neptune-ML125
 
 <div align="center" style="text-align: center;">
 
@@ -27,12 +30,6 @@ This is done by using either ModLoader or Forge entrypoints with some Java refle
 Available features are:
 - **Texture Stacking:** you can use several textures by order simultaneously!
 - **Runtime Item Gluing:** now if two texturepacks change the different parts of the same texture (see below), they will be "glued" together.
-
-This source set of Stack 'Em Neptune is supported on following environments:
-- **ModLoader `b1.7.3`**: `-ml` suffix.
-- **NFC `b1.7.3`**: `-nfc` suffix.
-
-More environments & versions coming soon (maybe)!
 
 ## Development
 
