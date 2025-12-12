@@ -10,13 +10,13 @@
 
 <div align="center" style="text-align: center;">
 
-![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/master/docs/mod_logo.png)
+![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/ml_b173/docs/mod_logo.png)
 
 [![Available on - Modrinth](https://img.shields.io/badge/Available_on-Modrinth-4bab62?logo=modrinth&logoColor=white)](https://modrinth.com/mod/stack-em-neptune) ![GitHub License](https://img.shields.io/github/license/tracystacktrace/StackEm-Neptune-ML?label=License&color=blue) ![GitHub Tag](https://img.shields.io/github/v/tag/tracystacktrace/StackEm-Neptune-ML?label=Version)
 
 </div>
 
-![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/master/docs/screenshot_b173_0.png)
+![](https://github.com/tracystacktrace/StackEm-Neptune-ML/raw/ml_b173/docs/screenshot_b173_0.png)
 
 
 **Stack 'Em Neptune** is a compact and lightweight version of original [**Stack 'Em**](https://modrinth.com/mod/stack-em) mod that is designed to provide maximum compatibility for most vanilla/modded minecraft versions.
